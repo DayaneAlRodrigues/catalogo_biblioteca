@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
-export function AuthProvider ({children}){
+export const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = ({children})=> {
     const [isAuth, setIsAuth] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const storedAuth = localStorage.getItem("isAuth");
@@ -17,28 +17,20 @@ export function AuthProvider ({children}){
 
     const login = (email, password) => {
 
-        if(!email && !password) {
+        if(email && password) {
             setIsAuth(true);
             localStorage.setItem("isAuth", "true");
-            navigate("/home");
             return true;
         }
         return false;
     } 
     const logout = () => {
         setIsAuth(false);
-        navigate("/login");
     }
 
-    const value = useMemo(() => ({isAuth, login, logout}), [user])
+    const value = useMemo(() => ({isAuth, login, logout}))
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export function useAuth() {
-    const ctx = useContext(AuthContext);
-    if(!ctx) {
-         throw new Error ("useAuth deve ser usado dentro de <AuthProvider>");
-    }
-    return ctx;
-}
+

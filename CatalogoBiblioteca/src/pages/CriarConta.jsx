@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { useNavigate } from "react-router";
 
 function CriarConta () {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState ("");
     const [error, setError] = useState ("");
+
+    const navigate = useNavigate();
 
     const criarConta = (event) => {
         event.preventDefault();
@@ -21,6 +24,7 @@ function CriarConta () {
             senha: senha
         }
         console.log(newLogin)
+        navigate("/login");
     }
     return (
         <>
@@ -30,8 +34,8 @@ function CriarConta () {
                 <h1>Criar Conta</h1>
             </div>
             <div>
-                <form>
-                    <label onSubmit={criarConta}>Email</label>
+                <form onSubmit={criarConta}>
+                    <label >Email</label>
                     <input type="email"
                     value = {email}
                     onChange ={(e) => setEmail(e.target.value)} />
