@@ -1,13 +1,13 @@
-package com.biblioteca.catalogo_backend;
+package com.almaidadev.library_catalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CatalogoBackendApplication {
+public class LibraryCatalogApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CatalogoBackendApplication.class, args);
+		SpringApplication.run(LibraryCatalogApplication.class, args);
 	}
 
 }
